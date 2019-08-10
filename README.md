@@ -1,5 +1,6 @@
 # create-sdl-app
-Simple tool to generate a C++ SDL project.
+- Simple tool to generate a C++ SDL project.
+- Has only point, line and rectangle draws.
 
 ## Info
 - SDL version: SDL2-2.0.10
@@ -15,6 +16,7 @@ Simple tool to generate a C++ SDL project.
 local WORKSPACE_NAME = "Workspace"
 local PROJECT_NAME = "Project"
 local ROOT_DIRECTORY = ".\\"
+
 ...
 ```
 2. Run ```GenerateProject.bat``` file and it will generate the VS 2017 solution to ```ROOT_DIRECTORY/WORKSPACE```
@@ -23,18 +25,33 @@ local ROOT_DIRECTORY = ".\\"
 
 ## Project Directory
 ```
-workspace
+[WORKSPACE_NAME]
 ├── .gitignore
 ├── README.md
 ├── workspace.sln
-├── project/
-    ├── project.vcxproj
-    ├── bin/
-    ├── include/
-    └── src/
-        └── main.cpp
+├── [PROJECT_NAME]/
+	├── project.vcxproj
+	├── project.vcxproj.filters
+	├── bin/
+	├── include/
+		├── AABB.h
+		├── Application.h
+		├── Color.h
+		├── MathUtil.h
+		├── Scene.h
+		├── Vec2f.h
+		└── Window.h
+	└── src/
+		├── AABB.cpp
+		├── Application.cpp
+		├── Color.cpp
+		├── main.cpp		<-- entry point
+		├── MathUtil.cpp
+		├── Scene.cpp		<-- where you put your code
+		├── Vec2f.cpp
+		└── Window.cpp
 └── vendor/
-    └──  SDL2-2.0.10/
+	└──  SDL2-2.0.10/
 ```
 
 ## Libraries

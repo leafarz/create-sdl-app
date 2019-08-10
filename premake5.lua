@@ -46,6 +46,7 @@ project (PROJECT_NAME)
 
    files
    {
+      "%{prj.location}/include/*.h",
       "%{prj.location}/src/*.cpp"
    }
 
@@ -66,11 +67,12 @@ project (PROJECT_NAME)
       {
          "XCOPY /Y /I %{wks.location}vendor\\SDL2-2.0.10\\lib\\".. ARCHITECTURE .. "\\SDL2.dll %{cfg.buildtarget.directory}"
       }
-      
-      os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\bin\\")
-      os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\include\\")
 
+      os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\bin\\")
+      
+      os.execute("XCOPY /E /Y src\\include " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\include\\")
+      os.execute("XCOPY /E /Y src\\src " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\src\\")
       os.execute("XCOPY /E /Y src\\vendor " .. WORKSPACE_DIR .. "\\vendor\\")
+
       os.execute("XCOPY /I /Y src\\.gitignore " .. WORKSPACE_DIR .. "\\")
-      os.execute("XCOPY /I /Y src\\main.cpp " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\src\\")
       os.execute("XCOPY /I /Y src\\README.md " .. WORKSPACE_DIR .. "\\")
