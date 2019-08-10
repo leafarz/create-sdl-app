@@ -18,7 +18,7 @@ local ROOT_DIRECTORY = ".\\"
 ...
 ```
 2. Run ```GenerateProject.bat``` file and it will generate the VS 2017 solution to ```ROOT_DIRECTORY/WORKSPACE```
-(**WARNING:** This has no safety checks so make sure to check paths. This was made only for testing purposes.)
+(**WARNING:** This has no safety checks so it might be destructive. Make sure to check the paths. This was made only for testing purposes.)
 3. Open the solution file in the root directory and you should be able to run the project.
 
 ## Project Directory
