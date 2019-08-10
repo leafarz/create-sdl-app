@@ -5,10 +5,11 @@ local ROOT_DIRECTORY = ".\\"
 
 -- Start
 local WORKSPACE_DIR = ROOT_DIRECTORY .. WORKSPACE_NAME
+local ARCHITECTURE = "x64"
 
 workspace (WORKSPACE_NAME)
    location (WORKSPACE_DIR)
-   architecture "x64"
+   architecture (ARCHITECTURE)
 	startproject (PROJECT_NAME)
    configurations
    {
@@ -18,23 +19,23 @@ workspace (WORKSPACE_NAME)
 
 
 project (PROJECT_NAME)
-   location (WORKSPACE_DIR .. "\\" .. "%{prj.name}")
+   location (WORKSPACE_DIR .. "/" .. "%{prj.name}")
    kind "ConsoleApp"
    language "C++"
    cppdialect "C++17"
 
-   targetdir ("$(SolutionDir)$(ProjectName)\\bin\\$(PlatformTarget)_$(Configuration)")
-   objdir ("$(SolutionDir)$(ProjectName)\\bin\\$(PlatformTarget)_$(Configuration)" .. "\\intermediate\\")
-   
+   targetdir ("%{prj.location}/bin/" .. ARCHITECTURE .. "_%{cfg.shortname}")
+   objdir ("%{prj.location}/bin/" .. ARCHITECTURE .. "_%{cfg.shortname}/intermediate/")
+
    includedirs
    {
-      "$(SolutionDir)vendor\\SDL2-2.0.10\\include",
-      "$(ProjectDir)include\\"
+      "%{wks.location}/vendor/SDL2-2.0.10/include",
+      "%{prj.location}/include/"
    }
 
    libdirs
    {
-      "$(SolutionDir)vendor\\SDL2-2.0.10\\lib\\$(PlatformTarget)",
+      "%{wks.location}/vendor/SDL2-2.0.10/lib/" .. ARCHITECTURE,
    }
 
    links 
@@ -45,7 +46,7 @@ project (PROJECT_NAME)
 
    files
    {
-      "%{prj.location}\\src\\*.cpp"
+      "%{prj.location}/src/*.cpp"
    }
 
    filter "system:windows"
@@ -60,12 +61,12 @@ project (PROJECT_NAME)
       defines { "NDEBUG" }
       optimize "On"
 
-   filter "configurations:*"
+   filter {}
       postbuildcommands
       {
-         "XCOPY /Y /I $(SolutionDir)vendor\\SDL2-2.0.10\\lib\\x64\\SDL2.dll $(TargetDir)"
+         "XCOPY /Y /I %{wks.location}vendor\\SDL2-2.0.10\\lib\\".. ARCHITECTURE .. "\\SDL2.dll %{cfg.buildtarget.directory}"
       }
-
+      
       os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\bin\\")
       os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\include\\")
 
