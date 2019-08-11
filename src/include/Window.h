@@ -17,12 +17,12 @@ class Window
 public:
 	Window(const std::string& windowTitle, int width, int height);
 
-	SDL_Renderer** getRenderer(void) { return &m_Renderer; }
-	SDL_Window** getWindow(void) { return &m_Window; }
-	int getWidth(void) const { return m_Width; }
-	int getHeight(void) const { return m_Height; }
+	inline SDL_Renderer** getRenderer(void) { return &m_Renderer; }
+	inline SDL_Window** getWindow(void) { return &m_Window; }
+	inline int getWidth(void) const { return m_Width; }
+	inline int getHeight(void) const { return m_Height; }
 
-	const std::string& getTitle(void) const { return m_WindowTitle; }
+	inline const std::string& getTitle(void) const { return m_WindowTitle; }
 	void setTitle(const std::string& windowTitle);
 
 	void clear(const Color& bg = Color::Black);

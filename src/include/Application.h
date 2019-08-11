@@ -11,9 +11,9 @@ public:
 	Application(const char* windowName, int width, int height);
 	~Application(void);
 
-	static Application* getInstance(void) { return s_Instance; }
+	inline static Application* getInstance(void) { return s_Instance; }
 
-	Window* getWindow(void) const { return m_Window; }
+	inline Window* getWindow(void) const { return m_Window; }
 
 	void run(void);
 
