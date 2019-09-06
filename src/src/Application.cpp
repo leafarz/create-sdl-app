@@ -15,12 +15,13 @@ Application::Application(const char * windowName, int width, int height)
 
 	m_TimeStep = 1 / 60.0f;
 
-	m_Window = new Window(windowName, width, height);
-	m_Scene = new Scene();
+	m_Window = std::make_unique<Window>(windowName, width, height);
+	m_Scene = std::make_unique<Scene>();
 }
 
 Application::~Application(void)
 {
+	s_Instance = nullptr;
 	delete this;
 }
 

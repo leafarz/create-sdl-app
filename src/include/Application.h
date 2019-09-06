@@ -2,6 +2,8 @@
 #define		APPLICATION_H
 #pragma once
 
+#include <memory>
+
 class Window;
 class Scene;
 
@@ -13,15 +15,15 @@ public:
 
 	inline static Application* getInstance(void) { return s_Instance; }
 
-	inline Window* getWindow(void) const { return m_Window; }
+	inline Window& getWindow(void) const { return *m_Window; }
 
 	void run(void);
 
 private:
 	static Application* s_Instance;
 
-	Window* m_Window;
-	Scene* m_Scene;
+	std::unique_ptr<Window> m_Window;
+	std::unique_ptr<Scene> m_Scene;
 
 	float m_TimeStep;
 	float m_GameTime = 0.0f;
