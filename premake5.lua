@@ -65,7 +65,7 @@ project (PROJECT_NAME)
    filter {}
       postbuildcommands
       {
-         "XCOPY /Y /I %{wks.location}vendor\\SDL2-2.0.10\\lib\\".. ARCHITECTURE .. "\\SDL2.dll %{cfg.buildtarget.directory}"
+         "XCOPY /Y /I \"%{wks.location}vendor\\SDL2-2.0.10\\lib\\".. ARCHITECTURE .. "\\SDL2.dll\" \"%{cfg.buildtarget.directory}\""
       }
 
       os.execute("mkdir " .. WORKSPACE_DIR .. "\\" .. PROJECT_NAME .. "\\bin\\")
